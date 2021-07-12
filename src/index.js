@@ -18,6 +18,7 @@ function sendSearch(e) {
     apiServicePixabey.resetPage();
  const inputData = e.currentTarget;
     apiServicePixabey.request = inputData.elements.query.value;
+    console.log( apiServicePixabey.request);
     if (apiServicePixabey.request === ' ' || apiServicePixabey.request === '' ) {
         return alert('Вы ввели пробел! Введите свой запрос')
     }

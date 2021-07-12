@@ -9,14 +9,14 @@ export default class ApiServicePixabey {
     }
 
     async getApiCards() {
-    // console.log("Before request",this);
+    console.log("Before request",this);
     
     try {
         const response = await fetch(`${URL}?image_type=photo&orientation=horizontal&q=${this.searchRequest}&page=${this.page}&per_page=${perPage}&key=${KEY}`);
         // const cardFromAPi = await response.json(); // response.json() на свое место возвращает Промис!!!
         // this.incrementPage();
-        // // console.log("After request", this);
-        // // console.log(cardFromAPi.hits);
+        console.log("After request", this);
+        console.log(cardFromAPi.hits);
         // return cardFromAPi.hits;
         const { hits }= await response.json(); // response.json() на свое место возвращает Промис!!!
         this.incrementPage();
