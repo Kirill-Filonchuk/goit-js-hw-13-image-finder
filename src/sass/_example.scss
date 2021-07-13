@@ -13,6 +13,18 @@ li {
   list-style-type: none;
 }
 
+.m-element-selector {
+  display: block;
+  border: 5px solid red;
+  width: 50%;
+  height: 10px;
+  margin: 0 auto;
+}
+
+.btn-load {
+  height: 30px;
+}
+
 @media screen and (max-width: 400px) {
   .container {
     display: block;
