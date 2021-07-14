@@ -4,5 +4,6 @@ export default function getRefs() {
         btnSearch: document.querySelector('.btn-search'),
         cardContainer: document.querySelector('.gallery'),
         btnLoad: document.querySelector('.btn-load'),
+        scrolObj: document.querySelector('.my-element-selector'),
     }
 }

@@ -1,5 +1,6 @@
 // Путь к изображениям из SASS-файла всегда такой, как из папки css
 // background-image: url('../images/demo.jpg');
+
 .material-icons {
   margin-right: 5px;
 }
@@ -13,12 +14,15 @@ li {
   list-style-type: none;
 }
 
-.m-element-selector {
+.my-element-selector {
   display: block;
+  background-color: rgb(8, 8, 8);
   border: 5px solid red;
+  border-radius: 5px;
   width: 50%;
   height: 10px;
-  margin: 0 auto;
+
+  margin: 5px auto;
 }
 
 .btn-load {

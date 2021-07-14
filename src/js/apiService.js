@@ -1,3 +1,6 @@
+import getRefs from './refs';
+const refs = getRefs();
+
 const URL = "https://pixabay.com/api/"
     const KEY = "22443315-0655a572bf532c2d4a9d9c050";
     const perPage = "12";
@@ -25,6 +28,13 @@ export default class ApiServicePixabey {
         return console.log(e);
         }
     }
+
+   async handleButtonClick() {
+       console.log('1LoadMore1');
+       
+       return await refs.scrolObj.scrollIntoView({ block: "end", behavior: "smooth" }); 
+    }
+
     incrementPage() {
     this.page += 1;
     }

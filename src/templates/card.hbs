@@ -1,30 +1,4 @@
 {{#each this}}
-    {{#if @last}}
-    <li class="card-item">
-        <div class="photo-card my-element-selector">
-            <img src="{{webformatURL}}" alt="{{tags}}" class="photo-img"/>
-
-            <div class="stats">
-                <p class="stats-item">
-                    <i class="material-icons">thumb_up</i>
-                    {{likes}}
-                </p>
-                <p class="stats-item">
-                    <i class="material-icons">visibility</i>
-                    {{views}}
-                </p>
-                <p class="stats-item">
-                    <i class="material-icons">comment</i>
-                    {{comments}}
-                </p>
-                <p class="stats-item">
-                    <i class="material-icons">cloud_download</i>
-                    {{downloads}}
-                </p>
-            </div>
-        </div>
-    </li>
-    {{else}}
     <li class="card-item">
         <div class="photo-card">
             <img src="{{webformatURL}}" alt="{{tags}}" class="photo-img"/>
@@ -49,5 +23,4 @@
             </div>
         </div>
     </li>
-    {{/if}}
-{{/each}}
+  {{/each}}

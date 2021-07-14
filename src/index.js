@@ -6,30 +6,9 @@ import photoCardMarkup from './templates/card.hbs';
 
 const apiServicePixabey = new ApiServicePixabey()
 
-// const element = document.getElementById('.m-element-selector');
-// function handleButtonClick() {
-//     element.scrollIntoView({
-//         behavior: 'smooth',
-//         block: 'end',
-//     })
-// }
-
 const refs = getRefs();
 
 refs.btnLoad.addEventListener('click', onLoadMore)
-
-document.querySelector('.m-element-selector').scrollIntoView({
-  behavior: 'smooth',
-  block: 'end',
-});
-
-// function handleButtonClick() {
-    refs.btnLoad.scrollIntoView({
-        // inline: 'end',
-        behavior: 'smooth',
-        block: "center"
-    })
-// }
 
 refs.searchForm.addEventListener('submit', sendSearch);
 
@@ -45,8 +24,14 @@ function sendSearch(e) {
     }
     apiServicePixabey.getApiCards().then(photo => {
         clearPageOnNewSearch();
-        renderPhotoGalery(photo)
+        renderPhotoGalery(photo);
+
+    //   setTimeout(() => {console.log('In Timeout LoadMore');
+    //     handleButtonClick()
+    // },700)()
+        //onLoadMore(); // Why function call here?
     })
+   
     // Т.К. асинхронная ф-ция на свое место ВСЕГДА возвращает промис, то к ней я применяю THEN
    
 }
@@ -54,12 +39,19 @@ function sendSearch(e) {
 
 
 function onLoadMore() {
-    apiServicePixabey.getApiCards().then(renderPhotoGalery);
-    // handleButtonClick()
-    document.querySelector('.m-element-selector').scrollIntoView({
-  behavior: 'smooth',
-  block: 'end',
-});
+    apiServicePixabey.getApiCards()
+        .then(renderPhotoGalery).then(()=>  apiServicePixabey.handleButtonClick())    
+        .then(() => setTimeout(() => { apiServicePixabey.handleButtonClick() }, 700))
+    // apiServicePixabey.handleButtonClick().then()
+     // Why this do not here ?
+    // setTimeout(() => {console.log('In Timeout LoadMore');
+    //     handleButtonClick()
+    // },700)
+//     document.querySelector('.m-element-selector').scrollIntoView({
+//   behavior: 'smooth',
+//   block: 'end',
+// });
+    // apiServicePixabey.handleButtonClick().then()
 }
 // Метод парсит указанную строку как HTML и добавляет результирующие узлы в указанное место DOM-дерева. Не делает повторный рендеринг для существующих элементов внутри элемента-родителя на котором используется
 function renderPhotoGalery(photoFromApi) {
@@ -72,3 +64,11 @@ function clearPageOnNewSearch() {
 
 /// 
 
+// var scrolToEnd = document.getElementById("box1");
+
+
+
+// function handleButtonClick() {
+//     scrolToEnd.scrollIntoView({ block: "center", behavior: "smooth" }); 
+//     console.log('LoadMore');
+// }
