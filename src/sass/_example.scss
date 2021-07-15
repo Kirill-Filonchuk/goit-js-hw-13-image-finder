@@ -1,5 +1,9 @@
 // Путь к изображениям из SASS-файла всегда такой, как из папки css
 // background-image: url('../images/demo.jpg');
+$basicLightbox__background: rgba(0, 0, 0, 0.8); // Background color
+$basicLightbox__zIndex: 1000; // Stack order
+$basicLightbox__duration: 0.4s; // Transition duration
+$basicLightbox__timing: ease; // Transition timing
 
 .material-icons {
   margin-right: 5px;
@@ -57,7 +61,7 @@ li {
 
   .photo-card {
     margin-left: 0 auto;
-    height: 400px;
+    max-height: 300px;
   }
 
   .gallery {
@@ -212,23 +216,16 @@ li {
   }
 
   .card-item {
-    margin-bottom: 0;
+    display: flex;
     flex-basis: calc(100% / 2 - 10px);
 
-    margin-left: 10px;
+    max-height: 400px;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .photo-card {
     margin: 0 auto;
-    // height: 400px;
-  }
-
-  .card-item {
-    display: flex;
-    max-height: 400px;
-    margin-top: 10px;
-    margin-bottom: 10px;
   }
 
   .photo-img {
@@ -304,23 +301,18 @@ li {
   }
 
   .card-item {
-    margin-bottom: 0;
+    display: flex;
     flex-basis: calc(100% / 3 - 10px);
 
+    max-height: 400px;
     margin-left: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .photo-card {
     margin: 0 auto;
     // height: 400px;
-  }
-
-  .card-item {
-    display: flex;
-    max-height: 400px;
-    margin-top: 10px;
-    margin-bottom: 10px;
   }
 
   .photo-img {
@@ -396,23 +388,18 @@ li {
   }
 
   .card-item {
-    margin-bottom: 0;
+    display: flex;
     flex-basis: calc(100% / 4 - 10px);
 
+    max-height: 400px;
     margin-left: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .photo-card {
     margin: 0 auto;
     // height: 400px;
-  }
-
-  .card-item {
-    display: flex;
-    max-height: 400px;
-    margin-top: 10px;
-    margin-bottom: 10px;
   }
 
   .photo-img {

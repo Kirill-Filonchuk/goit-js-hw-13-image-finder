@@ -5,5 +5,5 @@ export default function getRefs() {
         cardContainer: document.querySelector('.gallery'),
         btnLoad: document.querySelector('.btn-load'),
         scrolObj: document.querySelector('.my-element-selector'),
-    }
+  }
 }

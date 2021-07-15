@@ -1,12 +1,39 @@
 import './sass/main.scss';
+import '../node_modules/basiclightbox/src/styles/main.scss';
+
+import * as basicLightbox from '../node_modules/basiclightbox';
 
 import getRefs from './js/refs';
 import ApiServicePixabey from './js/apiService';
 import photoCardMarkup from './templates/card.hbs';
 
+
+
 const apiServicePixabey = new ApiServicePixabey()
 
 const refs = getRefs();
+
+// ///////////// Modal window
+let link = '';
+
+refs.cardContainer.addEventListener('click', forModaWindow);
+
+function forModaWindow(e) {
+    e.preventDefault();
+    
+    if (e.target.nodeName !== "IMG")  return;
+ 
+    let a = e.target.parentNode
+    // console.log(a.getAttribute('href'));
+    // console.log(e.target.nodeName);
+    link=`<img src="${a.getAttribute('href')}" width="800" height="600">`
+    const instance = basicLightbox.create(link)
+    instance.show(link)
+}
+
+// ///////////// Modal window
+
+refs.btnLoad.style.visibility = 'hidden';
 
 refs.btnLoad.addEventListener('click', onLoadMore)
 
@@ -26,6 +53,7 @@ function sendSearch(e) {
         clearPageOnNewSearch();
         renderPhotoGalery(photo);
 
+refs.btnLoad.style.visibility = 'visible';
     //   setTimeout(() => {console.log('In Timeout LoadMore');
     //     handleButtonClick()
     // },700)()
