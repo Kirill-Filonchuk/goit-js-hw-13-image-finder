@@ -24,8 +24,7 @@ function forModaWindow(e) {
     if (e.target.nodeName !== "IMG")  return;
  
     let a = e.target.parentNode
-    // console.log(a.getAttribute('href'));
-    // console.log(e.target.nodeName);
+    
     link=`<img src="${a.getAttribute('href')}" width="800" height="600">`
     const instance = basicLightbox.create(link)
     instance.show(link)
@@ -35,52 +34,35 @@ function forModaWindow(e) {
 
 refs.btnLoad.style.visibility = 'hidden';
 
+//2 Закоментировал - активирован бесконечный скрол
 refs.btnLoad.addEventListener('click', onLoadMore)
 
 refs.searchForm.addEventListener('submit', sendSearch);
 
 function sendSearch(e) {
     e.preventDefault();
-    // clearPageOnNewSearch();
+    
     apiServicePixabey.resetPage();
  const inputData = e.currentTarget;
     apiServicePixabey.request = inputData.elements.query.value;
-    // console.log( apiServicePixabey.request);
+   
     if (apiServicePixabey.request === ' ' || apiServicePixabey.request === '' ) {
         return alert('Вы ввели пробел! Введите свой запрос')
     }
     apiServicePixabey.getApiCards().then(photo => {
         clearPageOnNewSearch();
         renderPhotoGalery(photo);
-
-refs.btnLoad.style.visibility = 'visible';
-    //   setTimeout(() => {console.log('In Timeout LoadMore');
-    //     handleButtonClick()
-    // },700)()
-        //onLoadMore(); // Why function call here?
+        refs.btnLoad.style.visibility = 'visible';
     })
-   
-    // Т.К. асинхронная ф-ция на свое место ВСЕГДА возвращает промис, то к ней я применяю THEN
-   
 }
-
-
-
+//3 Закоментировал - активирован бесконечный скрол
 function onLoadMore() {
     apiServicePixabey.getApiCards()
-        .then(renderPhotoGalery).then(()=>  apiServicePixabey.handleButtonClick())    
-        .then(() => setTimeout(() => { apiServicePixabey.handleButtonClick() }, 700))
-    // apiServicePixabey.handleButtonClick().then()
-     // Why this do not here ?
-    // setTimeout(() => {console.log('In Timeout LoadMore');
-    //     handleButtonClick()
-    // },700)
-//     document.querySelector('.m-element-selector').scrollIntoView({
-//   behavior: 'smooth',
-//   block: 'end',
-// });
-    // apiServicePixabey.handleButtonClick().then()
+        .then(renderPhotoGalery)
+        //4 .then(() => apiServicePixabey.handleButtonClick())
+        // .then(() => setTimeout(() => { apiServicePixabey.handleButtonClick() }, 700))
 }
+// Закоментировал - активирован бесконечный скрол
 // Метод парсит указанную строку как HTML и добавляет результирующие узлы в указанное место DOM-дерева. Не делает повторный рендеринг для существующих элементов внутри элемента-родителя на котором используется
 function renderPhotoGalery(photoFromApi) {
    refs.cardContainer.insertAdjacentHTML('beforeend', photoCardMarkup(photoFromApi))
@@ -90,13 +72,29 @@ function clearPageOnNewSearch() {
     refs.cardContainer.innerHTML = '';
 }
 
-/// 
 
-// var scrolToEnd = document.getElementById("box1");
+////////////// infinity scrol
 
+const options = {
+    // root: null,
+    rootMargin: '50px',
+    threshold: 0.1
+}
 
+var intersectionObserver = new IntersectionObserver(function(entries) {
+  // Если intersectionRatio равен 0, цель вне зоны видимости
+  // и нам не нужно ничего делать
+    if (entries[0].intersectionRatio <= 0) return;
+    if (apiServicePixabey.request === ' ' || apiServicePixabey.request === '') {
+        return
+    }
 
-// function handleButtonClick() {
-//     scrolToEnd.scrollIntoView({ block: "center", behavior: "smooth" }); 
-//     console.log('LoadMore');
-// }
+//1     apiServicePixabey.resetPage();
+//  apiServicePixabey.getApiCards()
+//         .then(renderPhotoGalery)
+    
+   onLoadMore();
+  console.log('Loaded new items');
+},options);
+// начать наблюдение
+intersectionObserver.observe(refs.scrolObj);

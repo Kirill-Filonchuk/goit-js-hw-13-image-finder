@@ -29,11 +29,11 @@ export default class ApiServicePixabey {
         }
     }
 
-   async handleButtonClick() {
-       console.log('1LoadMore1');
+//    async handleButtonClick() {
+//        console.log('1LoadMore1');
        
-       return await refs.scrolObj.scrollIntoView({ block: "end", behavior: "smooth" }); 
-    }
+//        return await refs.scrolObj.scrollIntoView({ block: "end", behavior: "smooth" }); 
+//     }
 
     incrementPage() {
     this.page += 1;
