@@ -28,13 +28,13 @@ export default class ApiServicePixabey {
         return console.dir(e);
         }
     }
-// Закоментировал - активирован бесконечный скрол
-//    async handleButtonClick() {
-//        console.log('1LoadMore1');
+
+   async handleButtonClick() {
+       console.log('1LoadMore1');
        
-//        return await refs.scrolObj.scrollIntoView({ block: "end", behavior: "smooth" }); 
-//     }
-// Закоментировал - активирован бесконечный скрол
+       return await refs.scrolObj.scrollIntoView({ block: "end", behavior: "smooth" }); 
+    }
+
     incrementPage() {
     this.page += 1;
     }
