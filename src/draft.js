@@ -124,3 +124,25 @@ function clearPageOnNewSearch() {
 // toLoad.forEach(i => {
 //     observer.observe(i)
 // })
+
+      
+//  const myStack = new PNotify.Stack({dir1: 'top', firstpos1: 25});
+// PNotify.notice({
+//   text: 'Notice 1.',
+//   stack: myStack
+// });
+// error({
+//   title: 'Ошибка',
+//     text: 'Вы ввели пробел! Но не ввели запрос',
+//   delay: 500,
+// });
+// notice({
+//   title: 'Oh No!',
+//     text: 'Something terrible happened.',
+//   delay: 500,
+// });
+// success({
+//   title: 'Oh No!',
+//     text: 'Something terrible happened.',
+//   delay: 500,
+// });

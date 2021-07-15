@@ -1,5 +1,6 @@
 import './sass/main.scss';
 import '../node_modules/basiclightbox/src/styles/main.scss';
+import '../node_modules/@pnotify/core/dist/BrightTheme.css';
 
 import * as basicLightbox from '../node_modules/basiclightbox';
 
@@ -7,7 +8,14 @@ import getRefs from './js/refs';
 import ApiServicePixabey from './js/apiService';
 import photoCardMarkup from './templates/card.hbs';
 
+import { alert, defaultModules, notice,  error, success} from '../node_modules/@pnotify/core/dist/PNotify.js';
+  import * as PNotifyMobile from '../node_modules/@pnotify/mobile/dist/PNotifyMobile.js';
+defaultModules.set(PNotifyMobile, {dir1: 'top', firstpos1: 25});
 
+ alert({
+      text: 'Введи Ваш запрос',
+       delay: 500,
+ });
 
 const apiServicePixabey = new ApiServicePixabey()
 
@@ -47,25 +55,46 @@ function sendSearch(e) {
     apiServicePixabey.request = inputData.elements.query.value;
    
     if (apiServicePixabey.request === ' ' || apiServicePixabey.request === '' ) {
-        return alert('Вы ввели пробел! Введите свой запрос')
+        return error({
+  title: 'Ошибка',
+    text: 'Вы напечатали пробел или вообще ничего не напечатали! Введите Ваш запрос',
+  delay: 1000,
+});
+        
     }
     apiServicePixabey.getApiCards().then(photo => {
         clearPageOnNewSearch();
         renderPhotoGalery(photo);
         refs.btnLoad.style.visibility = 'visible';
     })
+    
 }
 //3 Закоментировал - активирован бесконечный скрол
 function onLoadMore() {
     apiServicePixabey.getApiCards()
-        .then(renderPhotoGalery)
+        .then(renderPhotoGalery);
+     
         //4 .then(() => apiServicePixabey.handleButtonClick())
         // .then(() => setTimeout(() => { apiServicePixabey.handleButtonClick() }, 700))
 }
 // Закоментировал - активирован бесконечный скрол
 // Метод парсит указанную строку как HTML и добавляет результирующие узлы в указанное место DOM-дерева. Не делает повторный рендеринг для существующих элементов внутри элемента-родителя на котором используется
 function renderPhotoGalery(photoFromApi) {
-   refs.cardContainer.insertAdjacentHTML('beforeend', photoCardMarkup(photoFromApi))
+    refs.cardContainer.insertAdjacentHTML('beforeend', photoCardMarkup(photoFromApi))
+    console.log(photoFromApi);
+    if (photoFromApi.length === 0) {
+        error({
+  title: 'Ошибка',
+    text: 'НЕТ КАРТИНОК',
+  delay: 2000,
+});
+    } else {
+        success({
+  title: 'Супер!',
+    text: 'Любуйтесь картинками',
+  delay: 1000,
+});
+    }
 }
 
 function clearPageOnNewSearch() {
